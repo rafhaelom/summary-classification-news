@@ -12,7 +12,7 @@ async def home():
     )
 
 @app.post("/resumo/texto/")
-async def resumotexto(texto_noticia_request: ResumoTextoInput):
+async def ResumoTexto(texto_noticia_request: ResumoTextoInput):
     manchete = texto_noticia_request.texto_noticia
     score = texto_noticia_request.score
     return JSONResponse(
@@ -22,7 +22,7 @@ async def resumotexto(texto_noticia_request: ResumoTextoInput):
     )
 
 @app.post("/classificacao/texto/")
-async def classificacaotexto(texto_manchete_request: ClassificacaoTextoInput):
+async def ClassificacaoTexto(texto_manchete_request: ClassificacaoTextoInput):
     tema = texto_manchete_request.manchete_noticia
     score = 100
     return JSONResponse(
@@ -32,7 +32,7 @@ async def classificacaotexto(texto_manchete_request: ClassificacaoTextoInput):
     )
 
 @app.post("/resumo/url/")
-async def resumourl(url_noticia_request: ResumoUrlInput):
+async def ResumoUrl(url_noticia_request: ResumoUrlInput):
     url = url_noticia_request.url_noticia
     score = 100
     return JSONResponse(
@@ -42,7 +42,7 @@ async def resumourl(url_noticia_request: ResumoUrlInput):
     )
 
 @app.post("/classificacao/url/")
-async def classificacaourl(url_manchete_request: ClassificacaoUrlInput):
+async def ClassificacaoUrl(url_manchete_request: ClassificacaoUrlInput):
     url = url_manchete_request.url_noticia
     score = 100
     return JSONResponse(
