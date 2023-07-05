@@ -2,11 +2,13 @@ from pydantic import BaseModel
 
 class ResumoInput(BaseModel):
     texto_noticia: str
+    score: str
 
     class Config:
         schema_extra = {
             "example": {
-                "texto_noticia": "texto teste"
+                "texto_noticia": "texto_teste",
+                "score": "rouge"
             }
         }
 
@@ -16,6 +18,6 @@ class ClassificacaoInput(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "manchete_noticia": "manchete teste"
+                "manchete_noticia": "manchete_teste"
             }
         }
