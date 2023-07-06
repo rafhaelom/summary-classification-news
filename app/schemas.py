@@ -38,12 +38,14 @@ class ResumoUrlInput(BaseModel):
 
 class ClassificacaoUrlInput(BaseModel):
     url_noticia: str
+    titulo_noticia: str
     score: float
 
     class Config:
         schema_extra = {
             "example": {
                 "url_noticia": "https://www.<site>.com.br",
+                "titulo_noticia": "manchete",
                 "score": 100
             }
         }

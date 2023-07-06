@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from .functions import extract_news
 from .schemas import ResumoTextoInput, ClassificacaoTextoInput, ResumoUrlInput, ClassificacaoUrlInput
 
 app = FastAPI()
@@ -42,11 +43,13 @@ async def ResumoUrl(url_noticia_request: ResumoUrlInput):
     )
 
 @app.post("/classificacao/url/")
-async def ClassificacaoUrl(url_manchete_request: ClassificacaoUrlInput):
-    url = url_manchete_request.url_noticia
+async def ClassificacaoUrl(classificacaourl_request: ClassificacaoUrlInput):
+    url = classificacaourl_request.url_noticia
+    titulo = extract_news(url)
     score = 100
     return JSONResponse(
         status_code=200,
         content={'url_noticia': url,
+                 'titulo_noticia': titulo,
                  'score': score}
     )
