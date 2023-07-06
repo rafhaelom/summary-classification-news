@@ -1,6 +1,8 @@
 from goose3 import Goose
 
-g = Goose()
-article = g.extract(url='http://this-url.html')
-print(article.title)
-g.close()
+def extract_news(url):
+    g = Goose()
+    article = g.extract(url=url)
+    titulo = article.title
+    g.close()
+    return titulo
