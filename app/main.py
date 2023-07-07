@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from .functions import extract_news
+from .functions import extract_news, load_tokenizer_summary, load_model_summary, load_vectorizer_classification, load_model_classification
 from .schemas import ResumoTextoInput, ClassificacaoTextoInput, ResumoUrlInput, ClassificacaoUrlInput
 
 app = FastAPI()
@@ -14,7 +14,12 @@ async def home():
 
 @app.post("/resumo/texto/")
 async def ResumoTexto(texto_noticia_request: ResumoTextoInput):
-    manchete = texto_noticia_request.texto_noticia
+    text = texto_noticia_request.texto_noticia
+    inputs = tokenizer.encode(text, max_length=3000, truncation=True, return_tensors='pt')
+    summary_ids = model.generate(inputs, max_length=100, min_length=32, num_beams=5, no_repeat_ngram_size=3, early_stopping=True)
+    summary = tokenizer.decode(summary_ids[0])
+
+    manchete = summary.replace('<pad> ', '').replace('</s>','')
     score = texto_noticia_request.score
     return JSONResponse(
         status_code=200,
