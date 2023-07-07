@@ -4,6 +4,7 @@ transformers
 torch
 sentencepiece
 rouge-score
+scikit-learn
 goose3
 #spacy==3.5.3
 spacy>=3.0.0,<4.0.0
